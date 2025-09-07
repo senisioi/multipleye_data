@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 from wordfreq import available_languages
@@ -92,7 +93,7 @@ def fertility(df, tokenizer):
         rows.append({
             "stimulus_name": stim_name,
             "page": page_num,
-            f"fertility {tokenizer.name_or_path}": llm_tokens / len(tokens),
+            f"fertility {os.path.basename(tokenizer.name_or_path)}": llm_tokens / len(tokens),
             })
     df = pd.DataFrame(rows).sort_values(by=["stimulus_name", "page"])
     df.set_index(['stimulus_name', 'page'], inplace=True)
