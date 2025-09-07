@@ -1,5 +1,6 @@
 plotly
 kaleido
+transformers
 tokenizers==0.21
 wordfreq[cjk]
 huggingface_hub[cli]
