@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from scipy.stats import sem
 from wordfreq import available_languages
 from wordfreq import zipf_frequency
 from transformers import AutoTokenizer
