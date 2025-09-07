@@ -75,17 +75,17 @@ LANG_COLORS = {
     "ro": "#b45309",  # Romanian
     "rm": "#78350f",  # Romansh
     # --- Slavic (emerald/green hues) ---
+    "sl": "#A2EAD5",  # Slovenian
     "hr": "#6ee7b7",  # Croatian
     "mk": "#34d399",  # Macedonian
     "pl": "#10b981",  # Polish
-    "ru": "#059669",  # Russian
-    "sl": "#047857",  # Slovenian
+    "cs": "#059669",  # Czech
+    "ru": "#064e3b",  # Russian
     "uk": "#065f46",  # Ukrainian
-    "cs": "#064e3b",  # Czech
     # --- Baltic (violet hues) ---
     "lt": "#c084fc",  # Lithuanian
     "lv": "#a855f7",  # Latvian
-    # --- Uralic ---
+    # --- Finno-Ugric ---
     "et": "#4ade80",  # Estonian
     # --- Greek ---
     "el": "#3b82f6",  # Greek
@@ -104,3 +104,5 @@ LANG_COLORS = {
     # --- Eskimo–Aleut ---
     "kl": "#2dd4bf",  # Kalaallisut (Greenlandic)
 }
+
+LANG_ORDER = [lang for lang in list(LANG_COLORS.keys()) if lang in LANGUAGES]

@@ -2,11 +2,14 @@ import pandas as pd
 import plotly.graph_objects as go
 import os
 
-from language_constants import LANG_COLORS, LANGUAGES, SPACY_LANGUAGES, CODE2LANG
+from language_constants import (LANG_COLORS,
+                                LANGUAGES,
+                                SPACY_LANGUAGES,
+                                CODE2LANG,
+                                LANG_ORDER,
+                                )
 
 DEFAULT_COLOR = "#f97316"
-LANG_ORDER = [lang for lang in list(LANG_COLORS.keys()) if lang in LANGUAGES]
-
 
 from spacy.util import get_lang_class
 
