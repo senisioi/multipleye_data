@@ -83,7 +83,7 @@ for lang_dir in os.listdir(IN_DIR):
 
 csv_tables_html = "<h1>Processed Data</h1>\n"
 for language in LANG_ORDER:
-    files = html_lang_paths[LANG_ORDER]:
+    files = html_lang_paths[LANG_ORDER]
     csv_tables_html += f"<h2>{make_language_label(language)}</h2>\n<ul>\n"
     for html_file in files:
         file_name = os.path.basename(html_file)
