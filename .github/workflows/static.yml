@@ -40,6 +40,7 @@ jobs:
             python -m pip install --requirement requirements.txt
             ./get_data.sh
             plotly_get_chrome -y
+            hf auth login --token ${{ secrets.HFREAD }}
             python generate_plots.py
       - name: Setup Pages
         uses: actions/configure-pages@v5
