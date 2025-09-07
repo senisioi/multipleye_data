@@ -1,4 +1,24 @@
-SPACY_LANGUAGES = ["ca", "de", "el", "en", "es", "fr", "hr", "it", "lt", "mk", "nl", "pl", "pt", "ro", "ru", "sl", "sv", "uk", "zh"]
+SPACY_LANGUAGES = [
+    "ca",
+    "de",
+    "el",
+    "en",
+    "es",
+    "fr",
+    "hr",
+    "it",
+    "lt",
+    "mk",
+    "nl",
+    "pl",
+    "pt",
+    "ro",
+    "ru",
+    "sl",
+    "sv",
+    "uk",
+    "zh",
+]
 
 CODE2LANG = {
     "ar": "Arabic",
@@ -9,12 +29,12 @@ CODE2LANG = {
     "gsw": "Swiss German",
     "el": "Greek",
     "en": "English",
-    #"es": "Spanish",
+    # "es": "Spanish",
     "et": "Estonian",
     "eu": "Basque",
-    #"fr": "French",
-    #"he": "Hebrew",
-    #"hi": "Hindi",
+    # "fr": "French",
+    # "he": "Hebrew",
+    # "hi": "Hindi",
     "hr": "Croatian",
     "it": "Italian",
     "kl": "Kalaallisut",
@@ -32,14 +52,11 @@ CODE2LANG = {
     "sv": "Swedish",
     "tr": "Turkish",
     "uk": "Ukrainian",
-    #"yue": "Cantonese",
-    "zh": "Chinese"
+    # "yue": "Cantonese",
+    "zh": "Chinese",
 }
 
 LANGUAGES = list(CODE2LANG.keys())
-
-
-
 
 
 LANG_COLORS = {
@@ -49,7 +66,6 @@ LANG_COLORS = {
     "zd": "#f43f5e",  # Swiss German
     "nl": "#ef4444",  # Dutch
     "sv": "#dc2626",  # Swedish
-
     # --- Romance (amber/orange hues) ---
     "ca": "#fde047",  # Catalan
     "es": "#facc15",  # Spanish
@@ -58,7 +74,6 @@ LANG_COLORS = {
     "pt": "#d97706",  # Portuguese
     "ro": "#b45309",  # Romanian
     "rm": "#78350f",  # Romansh
-
     # --- Slavic (emerald/green hues) ---
     "hr": "#6ee7b7",  # Croatian
     "mk": "#34d399",  # Macedonian
@@ -67,34 +82,25 @@ LANG_COLORS = {
     "sl": "#047857",  # Slovenian
     "uk": "#065f46",  # Ukrainian
     "cs": "#064e3b",  # Czech
-
     # --- Baltic (violet hues) ---
     "lt": "#c084fc",  # Lithuanian
     "lv": "#a855f7",  # Latvian
-
     # --- Uralic ---
     "et": "#4ade80",  # Estonian
-
     # --- Greek ---
     "el": "#3b82f6",  # Greek
-
     # --- Turkic ---
     "tr": "#f97316",  # Turkish
-
     # --- Semitic (rose hues) ---
     "ar": "#fb7185",  # Arabic
     "he": "#f43f5e",  # Hebrew
-
     # --- Indo-Aryan ---
     "hi": "#eab308",  # Hindi
-
     # --- Sino-Tibetan (cyan hues) ---
     "zh": "#22d3ee",  # Mandarin Chinese
-    "yue": "#06b6d4", # Cantonese
-
+    "yue": "#06b6d4",  # Cantonese
     # --- Basque (indigo) ---
     "eu": "#6366f1",  # Basque
-
     # --- Eskimo–Aleut ---
     "kl": "#2dd4bf",  # Kalaallisut (Greenlandic)
 }

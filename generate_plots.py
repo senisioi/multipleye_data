@@ -1,6 +1,16 @@
 import os
 import pandas as pd
+from tqdm import tqdm
+from collections import defaultdict
 
+from language_constants import LANG_ORDER
+from features import featurize
+from plot_helpers import (make_combined_figure,
+                          make_wide_figure,
+                          make_intermediate_features_for_plot,
+                          make_single_figure,
+                          make_language_label,
+                          )
 
 
 IN_DIR='data/'
@@ -25,18 +35,12 @@ for lang_dir in os.listdir(IN_DIR):
 
 
 
-from features import featurize
-from tqdm import tqdm
 
 out = {}
 for lang_code, _ in tqdm(language_data.items()):
     out[lang_code] = featurize(language_data[lang_code])
 
 
-from plot_helpers import (make_combined_figure,
-                          make_wide_figure,
-                          make_intermediate_features_for_plot,
-                          make_single_figure)
 
 
 feature = 'function words ratio'
@@ -57,7 +61,6 @@ for feature in tqdm(out['ro'].columns):
         make_single_figure(docdf, feature, level=level, out_dir='./img', show=False, xtitle=k, show_error_y=False)
 
 
-from collections import defaultdict
 
 html_csv_out = 'img/data'
 html_lang_paths = defaultdict(list)
@@ -79,8 +82,9 @@ for lang_dir in os.listdir(IN_DIR):
 
 
 csv_tables_html = "<h1>Processed Data</h1>\n"
-for language, files in html_lang_paths.items():
-    csv_tables_html += f"<h2>{language}</h2>\n<ul>\n"
+for language in LANG_ORDER:
+    files = html_lang_paths[LANG_ORDER]:
+    csv_tables_html += f"<h2>{make_language_label(language)}</h2>\n<ul>\n"
     for html_file in files:
         file_name = os.path.basename(html_file)
         csv_tables_html += f'<li><a href="{html_file}">{file_name}</a></li>\n'
