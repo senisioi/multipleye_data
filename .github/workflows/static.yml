@@ -31,6 +31,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build
+        run: |
+            python -m venv ./venv
+            source ./venv/bin/activate
+            echo "PATH=${PATH}" >> "${GITHUB_ENV}"
+            python -m pip install --upgrade pip
+            python -m pip install --requirement requirements.txt
+            python generate_plots.py
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

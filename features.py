@@ -5,7 +5,7 @@ from wordfreq import available_languages
 from wordfreq import zipf_frequency
 from transformers import AutoTokenizer
 
-tokenizer = AutoTokenizer.from_pretrained("swiss-ai/Apertus-70B-2509")
+
 id2name = {1: "PopSci_MultiplEYE", 2: "Ins_HumanRights", 3: "Ins_LearningMobility", 4: "Lit_Alchemist", 6: "Lit_MagicMountain", 7: "Lit_NorthWind", 8: "Lit_Solaris", 9: "Lit_BrokenApril", 10: "Arg_PISACowsMilk", 11: "Arg_PISARapaNui", 12: "PopSci_Caveman", 13: "Enc_WikiMoon"}
 name2id = {v:k for k,v in id2name.items()}
 
@@ -93,7 +93,7 @@ def fertility(df, tokenizer):
         rows.append({
             "stimulus_name": stim_name,
             "page": page_num,
-            f"fertility": llm_tokens / len(tokens),
+            f"fertility {tokenizer.name_or_path}": llm_tokens / len(tokens),
             })
     df = pd.DataFrame(rows).sort_values(by=["stimulus_name", "page"])
     df.set_index(['stimulus_name', 'page'], inplace=True)
@@ -101,6 +101,8 @@ def fertility(df, tokenizer):
 
 
 def featurize(df):
+    tok_name = "swiss-ai/Apertus-70B-2509"
+    tokenizer = AutoTokenizer.from_pretrained(tok_name)
     return pd.concat([
                   basic_page_features(df),
                   zipf_freq(df),
