@@ -63,7 +63,8 @@ LANG_COLORS = {
     # --- Germanic (red hues) ---
     "en": "#fca5a5",  # English
     "de": "#f87171",  # German
-    "zd": "#f43f5e",  # Swiss German
+    "gsw": "#f43f5e",  # Swiss German
+    #"zd": "#f43f5e",  # Swiss German
     "nl": "#ef4444",  # Dutch
     "sv": "#dc2626",  # Swedish
     # --- Romance (amber/orange hues) ---
