@@ -56,7 +56,7 @@ level='page'
 # make an index html that links to each html figure
 links = {}
 text_wise_links = {}
-import sys
+#import sys
 
 for feature in tqdm(out['ro'].columns):
     links[feature] = make_combined_figure(out, feature = feature, out_dir='./img', show=False)
