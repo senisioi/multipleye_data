@@ -132,6 +132,58 @@ def make_single_figure(
     return html_out
 
 
+def make_line_plots(feature_by_lang,
+    feature,
+    level="page",
+    out_dir="./",
+    xtitle="",
+    show=True,
+    show_error_y=True,
+):
+    _, doc_dfs, doc_stats = make_intermediate_features_for_plot(
+        feature_by_lang, feature, level
+    )
+    texts = doc_stats['ro'].stimulus_name.values
+    fig_all_docs = go.Figure()
+    for lang in LANG_ORDER:
+        if not lang in doc_stats:
+            continue
+        df = doc_stats[lang]
+        mean_val = df["mean"].iloc[0]
+        semm = df['sem']
+        fig_all_docs.add_trace(
+            go.Scatter(
+                x=df["stimulus_name"],
+                y=df["mean"],
+                error_y=dict(type="data", array=df["sem"]) if show_error_y else None,
+                mode='lines+markers',
+                name=make_language_label(lang),
+                marker_color=color_for(lang),
+                visible="legendonly" if mean_val == 0 else True,
+                text=texts,
+                #hovertemplate = 'Document: %{text}<br> Language: {lang}<br> Mean: %{y:.2f}<br>SEM: %{semm:.2f}<extra></extra>'
+                hovertemplate= f'Document: %{{text}}<br> Language: {make_language_label(lang)}<br> Mean: %{{y:.2f}}<br><extra></extra>'
+                #hovertemplate= f'Document: %{{text}}<br> Language: {make_language_label(lang)}<br> Mean: %{{y:.2f}}<br>SEM: %{{error_y}}<extra></extra>'
+            )
+        )
+    fig_all_docs.update_layout(
+        yaxis_title=f"mean {feature} per {level}",
+        title=f"Text {feature} per {level}",
+        xaxis=dict(tickfont=dict(size=14)),
+        legend=dict(font=dict(size=14)),
+    )
+
+    if show:
+        fig_all_docs.show()
+
+    html_out_dir = os.path.join(out_dir, "html", "textlevel")
+    os.makedirs(html_out_dir, exist_ok=True)
+    html_out = os.path.join(html_out_dir, f"{feature}_per_{level}_text.html")
+    fig_all_docs.write_html(html_out)
+    return html_out
+
+
+
 def make_wide_figure(
     feature_by_lang,
     feature,
