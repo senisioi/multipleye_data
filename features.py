@@ -95,7 +95,7 @@ def zipf_freq(df):
                 "stimulus_name": stim_name,
                 "page": page_num,
                 "mean Zipf freq.": np.mean(frequencies),
-                "median Zipf freq.F": np.median(frequencies),
+                "median Zipf freq.": np.median(frequencies),
                 "std Zipf freq.": np.std(frequencies),
             }
         )
