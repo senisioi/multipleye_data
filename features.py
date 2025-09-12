@@ -36,7 +36,7 @@ def basic_page_features(df):
         ttr = len(types) / len(tokens) if tokens else 0
         num_punct = len(page_df[page_df.is_punct])
         num_stop = len(page_df[page_df.is_stop])
-        num_sentences = len(page_df.sent_idx.unique())
+        num_sentences = sum(page_df.token == '<eos>')
         word_len = [len(tok) for tok in tokens]
         rows.append(
             {
