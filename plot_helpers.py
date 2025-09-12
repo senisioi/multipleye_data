@@ -24,10 +24,10 @@ def exists_spacy_blank(lang_code):
 
 def make_language_label(lang_code):
     if lang_code in SPACY_LANGUAGES:
-        return CODE2LANG[lang_code]
+        return CODE2LANG.get(lang_code, lang_code)
     elif exists_spacy_blank(lang_code):
-        return CODE2LANG[lang_code] + "*"
-    return CODE2LANG[lang_code] + "-"
+        return CODE2LANG.get(lang_code, lang_code) + "*"
+    return CODE2LANG.get(lang_code, lang_code) + "-"
 
 
 def doc_arrays(doc_name, doc_stats):

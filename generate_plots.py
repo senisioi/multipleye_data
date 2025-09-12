@@ -3,7 +3,9 @@ import pandas as pd
 from tqdm import tqdm
 from collections import defaultdict
 
-from language_constants import LANG_ORDER
+from language_constants import (LANG_ORDER,
+                                LANGUAGES,
+                                )
 from features import featurize
 from plot_helpers import (make_combined_figure,
                           make_wide_figure,
@@ -33,8 +35,6 @@ for lang_dir in os.listdir(IN_DIR):
                 language_csvs.append(current_df)
         if language_csvs:
             language_data[lang_dir] = pd.concat(language_csvs, axis=0)
-
-
 
 
 out = {}
