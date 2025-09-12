@@ -45,8 +45,24 @@ for lang_code, _ in tqdm(language_data.items()):
         break
     limit -= 1
 
+html_csv_ftr_out = 'img/features'
+html_lang_ftr_paths = defaultdict(list)
 
+for lang_code, dataframe in out.items():
+    out_dir = os.path.join(html_csv_ftr_out, lang_code)
+    os.makedirs(out_dir, exist_ok=True)
+    out_fis = os.path.join(out_dir, f"{lang_code}.html")
+    dataframe.to_html(out_fis)
+    html_lang_ftr_paths[lang_code].append(out_fis)
 
+feature_tables_html = "<h1>Feature Data</h1>\n"
+for language, paths in html_lang_ftr_paths.items():
+    for path in paths:
+        href = f'<h3><a href="{path}">{make_language_label(language)}</a></h3>\n'
+        feature_tables_html += href
+
+with open('feature_tables.html', 'w') as f:
+    f.write(feature_tables_html)
 
 feature = 'function words ratio'
 level='page'
@@ -102,6 +118,7 @@ with open('csv_tables.html', 'w') as f:
 
 html = "<h1>MultiplEYE Corpus Statistics per page.</h1>\n"
 html += '<p><a href="csv_tables.html">Preprocessed Data</a></p>\n'
+html += '<p><a href="feature_tables.html">Feature Data</a></p>\n'
 html += "<h2>Language-wise Results:</h1>\n"
 for text, link in links.items():
     html += f'<p><a href="{link}">{text}</a></p>\n'
