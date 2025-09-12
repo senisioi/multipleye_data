@@ -117,7 +117,7 @@ def fertility(df, tokenizer):
                 "stimulus_name": stim_name,
                 "page": page_num,
                 f"fertility {os.path.basename(tokenizer.name_or_path)}": llm_tokens
-                / len(tokens),
+                / len(tokens) if len(tokens) else 0,
             }
         )
     df = pd.DataFrame(rows).sort_values(by=["stimulus_name", "page"])
