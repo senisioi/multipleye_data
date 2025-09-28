@@ -1,0 +1,5 @@
+*
+!/.gitignore
+!/raw/README.md
+!/dump/README.md
+!/processed/README.md
