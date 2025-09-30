@@ -41,7 +41,7 @@ jobs:
             ./get_data.sh
             plotly_get_chrome -y
             hf auth login --token ${{ secrets.HFREAD }}
-            python generate_plots.py
+            python src/generate_plots.py
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
