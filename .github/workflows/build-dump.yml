@@ -38,16 +38,9 @@ jobs:
 
       - name: Run Notebook
         run: |
-          papermill --kernel python3 --log-output \
+          papermill --kernel python3 \
             "notebooks/generate_spaCy_dumps.ipynb" "/tmp/run_dump_output.ipynb"
-
-      - name: Upload executed notebook
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: run_dump_output
-          path: /tmp/run_dump_output.ipynb
-
+            
       - name: Upload dump as artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -55,3 +48,4 @@ jobs:
           name: dump-csvs
           path: data/dump
           if-no-files-found: warn
+
