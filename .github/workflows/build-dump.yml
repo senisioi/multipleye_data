@@ -1,0 +1,38 @@
+name: Build spaCy csv dump
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    env:
+      LANGS: "en,ro"
+      OUT_DIR: "data/dump"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install papermill
+
+      - name: Run Notebook
+        run: |
+          papermill "generate_spaCy_dumps.ipynb" "run_dump_output.ipynb"
+
+      - name: Upload dump as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dump-csvs
+          path: data/dump
