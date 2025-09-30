@@ -24,16 +24,28 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install papermill
+          pip install -r requirements.txt || true
+          pip install papermill pandas spacy tqdm unzip
+
+      - name: Ensure output dir
+        run: mkdir -p data/dump
 
       - name: Run Notebook
         run: |
-          papermill "notebooks/generate_spaCy_dumps.ipynb" "/tmp/run_dump_output.ipynb"
+          papermill --kernel python3 --log-output \
+            "notebooks/generate_spaCy_dumps.ipynb" "/tmp/run_dump_output.ipynb"
+
+      - name: Upload executed notebook
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: run_dump_output
+          path: /tmp/run_dump_output.ipynb
 
       - name: Upload dump as artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: dump-csvs
-
           path: data/dump
+          if-no-files-found: warn
