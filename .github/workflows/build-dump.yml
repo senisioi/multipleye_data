@@ -21,11 +21,17 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: System packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip wget
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt || true
-          pip install papermill pandas spacy tqdm unzip
+          pip install papermill pandas spacy tqdm ipykernel
+          python -m ipykernel install --user --name python3
 
       - name: Ensure output dir
         run: mkdir -p data/dump
