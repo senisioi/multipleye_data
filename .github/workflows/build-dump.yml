@@ -29,10 +29,11 @@ jobs:
 
       - name: Run Notebook
         run: |
-          papermill "generate_spaCy_dumps.ipynb" "run_dump_output.ipynb"
+          papermill "notebooks/generate_spaCy_dumps.ipynb" "/tmp/run_dump_output.ipynb"
 
       - name: Upload dump as artifact
         uses: actions/upload-artifact@v4
         with:
           name: dump-csvs
+
           path: data/dump
