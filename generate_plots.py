@@ -105,7 +105,7 @@ for lang_dir in os.listdir(IN_DIR):
 
 csv_tables_html = "<h1>Processed Data</h1>\n"
 for language in LANG_ORDER:
-    csv_tables_html += f'<a href="#{make_language_label(language)}">{make_language_label(language)}</a>\n'
+    csv_tables_html += f'<a href="#{make_language_label(language)}">{make_language_label(language)}</a>\n<br />'
 
 for language in LANG_ORDER:
     files = html_lang_paths[language]
