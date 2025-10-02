@@ -58,8 +58,8 @@ for lang_code, dataframe in out.items():
 feature_tables_html = "<h1>Feature Data</h1>\n"
 for language, paths in html_lang_ftr_paths.items():
     for path in paths:
-        href = f'<h3><a href="{path}">{make_language_label(language)}</a></h3>\n'
-        feature_tables_html += href
+        feature_tables_html += f'<a name="{make_language_label(language)}"></a>\n'
+        feature_tables_html += f'<h3><a href="{path}">{make_language_label(language)}</a></h3>\n'
 
 with open('feature_tables.html', 'w') as f:
     f.write(feature_tables_html)
@@ -106,6 +106,7 @@ for lang_dir in os.listdir(IN_DIR):
 csv_tables_html = "<h1>Processed Data</h1>\n"
 for language in LANG_ORDER:
     files = html_lang_paths[language]
+    csv_tables_html += f'<a name="{make_language_label(language)}"></a>\n'
     csv_tables_html += f"<h2>{make_language_label(language)}</h2>\n<ul>\n"
     for html_file in files:
         file_name = os.path.basename(html_file)
