@@ -65,9 +65,10 @@ LANG_COLORS = {
     "en": "#fca5a5",  # English
     "de": "#f87171",  # German
     "gsw": "#f43f5e",  # Swiss German
-    #"zd": "#f43f5e",  # Swiss German
+    "zd": "#f43f5e",  # Swiss German (alt code)
     "nl": "#ef4444",  # Dutch
     "sv": "#dc2626",  # Swedish
+
     # --- Romance (amber/orange hues) ---
     "ca": "#fde047",  # Catalan
     "es": "#facc15",  # Spanish
@@ -76,35 +77,49 @@ LANG_COLORS = {
     "pt": "#d97706",  # Portuguese
     "ro": "#b45309",  # Romanian
     "rm": "#78350f",  # Romansh
+
     # --- Slavic (emerald/green hues) ---
     "sl": "#A2EAD5",  # Slovenian
     "hr": "#6ee7b7",  # Croatian
     "mk": "#34d399",  # Macedonian
-    "pl": "#10b981",  # Polish
-    "cs": "#059669",  # Czech
-    "ru": "#064e3b",  # Russian
+    "cs": "#10b981",  # Polish
+    "pl": "#059669",  # Czech
     "uk": "#065f46",  # Ukrainian
+    "ru": "#064e3b",  # Russian
+
     # --- Baltic (violet hues) ---
     "lt": "#c084fc",  # Lithuanian
     "lv": "#a855f7",  # Latvian
+
     # --- Finno-Ugric ---
     "et": "#4ade80",  # Estonian
+
     # --- Greek ---
     "el": "#3b82f6",  # Greek
+
     # --- Turkic ---
     "tr": "#f97316",  # Turkish
+
     # --- Semitic (rose hues) ---
     "ar": "#fb7185",  # Arabic
     "he": "#f43f5e",  # Hebrew
+    "ha": "#be123c",  # Hausa (kept in Semitic/Afro-Asiatic group, darker rose)
+
     # --- Indo-Aryan ---
     "hi": "#eab308",  # Hindi
+
     # --- Sino-Tibetan (cyan hues) ---
     "zh": "#22d3ee",  # Mandarin Chinese
     "yue": "#06b6d4",  # Cantonese
-    # --- Basque (indigo) ---
+
+    # --- Basque (indigo unique) ---
     "eu": "#6366f1",  # Basque
+
     # --- Eskimo–Aleut ---
     "kl": "#2dd4bf",  # Kalaallisut (Greenlandic)
+
+    # --- Albanian (standalone, teal/blue-green family) ---
+    "sq": "#0d9488",  # Albanian
 }
 
-LANG_ORDER = [lang for lang in list(LANG_COLORS.keys()) if lang in LANGUAGES]
+LANG_ORDER = [lang for lang in list(LANG_COLORS.keys())]
