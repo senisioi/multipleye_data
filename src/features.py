@@ -126,7 +126,8 @@ def fertility(df, tokenizer):
 
 
 def featurize(df):
-    tok_name = "swiss-ai/Apertus-70B-2509"
+    #tok_name = "swiss-ai/Apertus-70B-2509"
+    tok_name = "xlm-roberta-base"
     tokenizer = AutoTokenizer.from_pretrained(tok_name)
     return pd.concat(
         [

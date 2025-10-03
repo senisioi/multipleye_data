@@ -3,6 +3,8 @@ import pandas as pd
 from tqdm import tqdm
 from collections import defaultdict
 
+os.makedirs("html/img", exist_ok=True)
+
 from language_constants import (LANG_ORDER,
                                 LANGUAGES,
                                 )
@@ -16,7 +18,7 @@ from plot_helpers import (make_combined_figure,
                           )
 
 
-IN_DIR='data/'
+IN_DIR='data/processed/'
 
 
 #columns = ['language', 'language_code', 'stimulus_name', 'page', 'sent_idx', 'token', 'is_alpha', 'is_stop', 'is_punct', 'lemma', 'upos', 'xpos', 'feats', 'head', 'deprel', 'deps', 'misc']
@@ -45,7 +47,7 @@ for lang_code, _ in tqdm(language_data.items()):
         break
     limit -= 1
 
-html_csv_ftr_out = 'img/features'
+html_csv_ftr_out = 'html/img/features'
 html_lang_ftr_paths = defaultdict(list)
 
 for lang_code, dataframe in out.items():
@@ -61,12 +63,12 @@ for language, paths in html_lang_ftr_paths.items():
         feature_tables_html += f'<a name="{make_language_label(language)}"></a>\n'
         feature_tables_html += f'<h3><a href="{path}">{make_language_label(language)}</a></h3>\n'
 
-with open('feature_tables.html', 'w') as f:
+with open('html/feature_tables.html', 'w') as f:
     f.write(feature_tables_html)
 
 feature = 'function words ratio'
 level='page'
-#make_combined_figure(out, feature = feature, out_dir='./img', show=False)
+#make_combined_figure(out, feature = feature, out_dir='./html/img', show=False)
 
 
 # make an index html that links to each html figure
@@ -75,16 +77,19 @@ text_wise_links = {}
 #import sys
 
 for feature in tqdm(out['ro'].columns):
-    links[feature] = make_combined_figure(out, feature = feature, out_dir='./img', show=False)
-    text_wise_links[feature] = make_line_plots(out, feature, level=level, out_dir='./img',  xtitle='', show=False, show_error_y=False)
+    p_comb = make_combined_figure(out, feature=feature, out_dir='./html/img', show=False)
+    links[feature] = os.path.relpath(p_comb, start='html')
+
+    p_txt = make_line_plots(out, feature, level=level, out_dir='./html/img', xtitle='', show=False, show_error_y=False)
+    text_wise_links[feature] = os.path.relpath(p_txt, start='html')
     lang_df, doc_dfs, _ = make_intermediate_features_for_plot(out, feature, level)
-    make_single_figure(lang_df, feature, level=level, out_dir='./img', show=False, xtitle='All documents')
+    make_single_figure(lang_df, feature, level=level, out_dir='./html/img', show=False, xtitle='All documents')
     for k, docdf in doc_dfs.items():
-        make_single_figure(docdf, feature, level=level, out_dir='./img', show=False, xtitle=k, show_error_y=False)
+        make_single_figure(docdf, feature, level=level, out_dir='./html/img', show=False, xtitle=k, show_error_y=False)
 
 #sys.exit(1)
 
-html_csv_out = 'img/data'
+html_csv_out = 'html/img/data'
 html_lang_paths = defaultdict(list)
 
 for lang_dir in os.listdir(IN_DIR):
@@ -113,10 +118,11 @@ for language in LANG_ORDER:
     csv_tables_html += f"<h2>{make_language_label(language)}</h2>\n<ul>\n"
     for html_file in files:
         file_name = os.path.basename(html_file)
-        csv_tables_html += f'<li><a href="{html_file}">{file_name}</a></li>\n'
+        rel = os.path.relpath(html_file, start='html')
+        csv_tables_html += f'<li><a href="{rel}">{file_name}</a></li>\n'
     csv_tables_html += "</ul>\n"
 
-with open('csv_tables.html', 'w') as f:
+with open('html/csv_tables.html', 'w') as f:
     f.write(csv_tables_html)
 
 
@@ -131,5 +137,5 @@ html += "<h2>Text-wise Results:</h1>\n"
 for text, link in text_wise_links.items():
     html += f'<p><a href="{link}">{text}</a></p>\n'
 
-with open('index.html', 'w') as f:
+with open('html/index.html', 'w') as f:
     f.write(html)
