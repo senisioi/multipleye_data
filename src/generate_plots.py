@@ -47,7 +47,7 @@ for lang_code, _ in tqdm(language_data.items()):
         break
     limit -= 1
 
-html_csv_ftr_out = 'html/img/features'
+html_csv_ftr_out = 'img/features'
 html_lang_ftr_paths = defaultdict(list)
 
 for lang_code, dataframe in out.items():
