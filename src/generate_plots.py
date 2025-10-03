@@ -47,7 +47,7 @@ for lang_code, _ in tqdm(language_data.items()):
         break
     limit -= 1
 
-html_csv_ftr_out = 'img/features'
+html_csv_ftr_out = 'html/img/features'
 html_lang_ftr_paths = defaultdict(list)
 
 for lang_code, dataframe in out.items():
@@ -55,7 +55,8 @@ for lang_code, dataframe in out.items():
     os.makedirs(out_dir, exist_ok=True)
     out_fis = os.path.join(out_dir, f"{lang_code}.html")
     dataframe.to_html(out_fis)
-    html_lang_ftr_paths[lang_code].append(out_fis)
+    html_lang_ftr_paths[lang_code].append(
+        os.path.relpath(out_fis, start='html'))
 
 feature_tables_html = "<h1>Feature Data</h1>\n"
 for language, paths in html_lang_ftr_paths.items():
