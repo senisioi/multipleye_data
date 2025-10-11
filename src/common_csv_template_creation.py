@@ -1,32 +1,34 @@
 # -*- coding: utf-8 -*-
 """MultiplEYE Common CSV template creation.ipynb
 requirements:
-pip install spacy
+pip install spacy pandas tqdm openpyxl
 
 # for Turkish, we'd have to run a separate pipeline with a different spacy version
 #! pip install "tr_core_news_lg @ https://huggingface.co/turkish-nlp-suite/tr_core_news_lg/resolve/main/tr_core_news_lg-1.0-py3-none-any.whl"
 
 
-!python -m spacy download ca_core_news_lg
-!python -m spacy download de_core_news_lg
-!python -m spacy download da_core_news_lg
-!python -m spacy download el_core_news_lg
-!python -m spacy download en_core_web_lg
-!python -m spacy download es_core_news_lg
-!python -m spacy download fr_core_news_lg
-!python -m spacy download hr_core_news_lg
-!python -m spacy download it_core_news_lg
-!python -m spacy download lt_core_news_lg
-!python -m spacy download mk_core_news_lg
-!python -m spacy download nl_core_news_lg
-!python -m spacy download pl_core_news_lg
-!python -m spacy download pt_core_news_lg
-!python -m spacy download ro_core_news_lg
-!python -m spacy download ru_core_news_lg
-!python -m spacy download sl_core_news_lg
-!python -m spacy download sv_core_news_lg
-!python -m spacy download uk_core_news_lg
-!python -m spacy download zh_core_web_lg
+python -m spacy download ca_core_news_lg
+python -m spacy download de_core_news_lg
+python -m spacy download da_core_news_lg
+python -m spacy download el_core_news_lg
+python -m spacy download en_core_web_lg
+python -m spacy download es_core_news_lg
+python -m spacy download fr_core_news_lg
+python -m spacy download hr_core_news_lg
+python -m spacy download it_core_news_lg
+python -m spacy download lt_core_news_lg
+python -m spacy download mk_core_news_lg
+python -m spacy download nl_core_news_lg
+python -m spacy download pl_core_news_lg
+python -m spacy download pt_core_news_lg
+python -m spacy download ro_core_news_lg
+python -m spacy download ru_core_news_lg
+python -m spacy download sl_core_news_lg
+python -m spacy download sv_core_news_lg
+python -m spacy download uk_core_news_lg
+python -m spacy download zh_core_web_lg
+
+python -m spacy download xx_sent_ud_sm
 
 
 """
@@ -288,7 +290,7 @@ for lang in os.listdir(IN_DIR):
 
 all_data = load_all_json(LANG_FOLDER)
 for k,v in all_data.items():
-    print(k, v[0])
+    print(k, v[0][:10])
 
 
 preproc = defaultdict(dict)
