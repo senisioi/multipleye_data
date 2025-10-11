@@ -55,6 +55,7 @@ for lang_code, dataframe in out.items():
     os.makedirs(out_dir, exist_ok=True)
     out_fis = os.path.join(out_dir, f"{lang_code}.html")
     dataframe.to_html(out_fis)
+    dataframe.to_csv(out_fis.replace('.html', '.csv'), index=False)
     html_lang_ftr_paths[lang_code].append(
         os.path.relpath(out_fis, start='html'))
 
@@ -107,6 +108,7 @@ for lang_dir in os.listdir(IN_DIR):
                 current_df = pd.read_csv(os.path.join(dir_path, csv_file),
                                          keep_default_na=False)                
                 current_df.to_html(out_fis)
+                current_df.to_csv(out_fis.replace('.html', '.csv'), index=False)
 
 
 csv_tables_html = "<h1>Processed Data</h1>\n"

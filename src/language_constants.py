@@ -1,6 +1,7 @@
 SPACY_LANGUAGES = [
     "ca",
     "de",
+    "da",
     "el",
     "en",
     "es",
@@ -27,6 +28,7 @@ CODE2LANG = {
     "de": "German",
     "zd": "Swiss German",
     "gsw": "Swiss German",
+    "da": "Danish",
     "el": "Greek",
     "en": "English",
     "es": "Spanish",
@@ -67,7 +69,8 @@ LANG_COLORS = {
     "gsw": "#f43f5e",  # Swiss German
     "zd": "#f43f5e",  # Swiss German (alt code)
     "nl": "#ef4444",  # Dutch
-    "sv": "#dc2626",  # Swedish
+    "da": "#dc2626",  # Danish
+    "sv": "#ad1b1b",  # Swedish
 
     # --- Romance (amber/orange hues) ---
     "ca": "#fde047",  # Catalan
@@ -94,16 +97,22 @@ LANG_COLORS = {
     # --- Finno-Ugric ---
     "et": "#4ade80",  # Estonian
 
+    # --- Basque (indigo unique) ---
+    "eu": "#6366f1",  # Basque
+
+    # --- Albanian (standalone, teal/blue-green family) ---
+    "sq": "#0d9488",  # Albanian
+
     # --- Greek ---
     "el": "#3b82f6",  # Greek
 
     # --- Turkic ---
     "tr": "#f97316",  # Turkish
 
-    # --- Semitic (rose hues) ---
+    # --- Afro-Asiatic (rose hues) ---
     "ar": "#fb7185",  # Arabic
     "he": "#f43f5e",  # Hebrew
-    "ha": "#be123c",  # Hausa (kept in Semitic/Afro-Asiatic group, darker rose)
+    "ha": "#be123c",  # Hausa 
 
     # --- Indo-Aryan ---
     "hi": "#eab308",  # Hindi
@@ -112,14 +121,9 @@ LANG_COLORS = {
     "zh": "#22d3ee",  # Mandarin Chinese
     "yue": "#06b6d4",  # Cantonese
 
-    # --- Basque (indigo unique) ---
-    "eu": "#6366f1",  # Basque
-
     # --- Eskimo–Aleut ---
     "kl": "#2dd4bf",  # Kalaallisut (Greenlandic)
 
-    # --- Albanian (standalone, teal/blue-green family) ---
-    "sq": "#0d9488",  # Albanian
 }
 
 LANG_ORDER = [lang for lang in list(LANG_COLORS.keys())]
