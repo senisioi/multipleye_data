@@ -72,6 +72,9 @@ LANG_COLORS = {
     "da": "#dc2626",  # Danish
     "sv": "#ad1b1b",  # Swedish
 
+    # --- Basque (indigo unique) ---
+    "eu": "#6366f1",  # Basque
+
     # --- Romance (amber/orange hues) ---
     "ca": "#fde047",  # Catalan
     "es": "#facc15",  # Spanish
@@ -96,9 +99,6 @@ LANG_COLORS = {
 
     # --- Finno-Ugric ---
     "et": "#4ade80",  # Estonian
-
-    # --- Basque (indigo unique) ---
-    "eu": "#6366f1",  # Basque
 
     # --- Albanian (standalone, teal/blue-green family) ---
     "sq": "#0d9488",  # Albanian
