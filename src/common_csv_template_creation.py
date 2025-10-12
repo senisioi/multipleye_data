@@ -296,7 +296,7 @@ for lang in os.listdir(IN_DIR):
 
 all_data = load_all_json(LANG_FOLDER)
 for k,v in all_data.items():
-    if v:
+    if v[0]:
         print(k, v[0][:10])
 
 
