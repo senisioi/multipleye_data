@@ -107,6 +107,10 @@ for lang_dir in os.listdir(IN_DIR):
                 html_lang_paths[language].append(out_fis)
                 current_df = pd.read_csv(os.path.join(dir_path, csv_file),
                                          keep_default_na=False)                
+                if language == "da":
+                    # Danish data is not redistributable
+                    current_df['token'] = ''
+                    current_df['lemma'] = ''
                 current_df.to_html(out_fis)
                 current_df.to_csv(out_fis.replace('.html', '.csv'), index=False)
 
