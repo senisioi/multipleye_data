@@ -41,6 +41,7 @@ import os
 import re
 import pandas as pd
 from spacy.util import get_lang_class
+from spacy.symbols import ORTH
 from tqdm import tqdm
 import pandas as pd
 from collections import defaultdict
@@ -128,6 +129,11 @@ def load_spacy_model(lang_code, small=True):
         print(f"Loading model {model_name} for {lang_code}")
         model = spacy.load(model_name)
         model.add_pipe("sentencizer")
+    special_cases = {"eye-tracking": [{ORTH: "eye-tracking"},
+                                      {ORTH: "Eye-tracking"},
+                                      {ORTH: "Eye-Tracking"}]}
+    for token, special_case in special_cases.items():
+        model.tokenizer.add_special_case(token, special_case)
     return model
 
 

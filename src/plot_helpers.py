@@ -25,6 +25,8 @@ def exists_spacy_blank(lang_code):
 def make_language_label(lang_code):
     if lang_code in SPACY_LANGUAGES:
         return CODE2LANG.get(lang_code, lang_code)
+    elif lang_code in {'he', 'zh', 'yue'}:
+        return CODE2LANG.get(lang_code, lang_code)
     elif exists_spacy_blank(lang_code):
         return CODE2LANG.get(lang_code, lang_code) + "*"
     return CODE2LANG.get(lang_code, lang_code) + "-"
@@ -304,7 +306,7 @@ def make_combined_figure(
             )
         ),
         yaxis_title=f"mean {feature} per {level}",
-        title=f"Document {feature} per sentence by {level}:",
+        title=f"Document {feature} by {level}:",
         # title_y=0.97,
         # template="plotly_dark",
     )
