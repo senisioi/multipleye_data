@@ -295,9 +295,9 @@ for lang in os.listdir(IN_DIR):
     xls_to_json(lang_file, out_file)
 
 all_data = load_all_json(LANG_FOLDER)
-for k,v in all_data.items():
-    if v[0]:
-        print(k, v[0][:10])
+#for k,v in all_data.items():
+#    if v[0]:
+#        print(k, v[0][:10])
 
 
 preproc = defaultdict(dict)
