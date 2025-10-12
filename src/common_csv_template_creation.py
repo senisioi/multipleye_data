@@ -296,7 +296,8 @@ for lang in os.listdir(IN_DIR):
 
 all_data = load_all_json(LANG_FOLDER)
 for k,v in all_data.items():
-    print(k, v[0][:10])
+    if v:
+        print(k, v[0][:10])
 
 
 preproc = defaultdict(dict)
