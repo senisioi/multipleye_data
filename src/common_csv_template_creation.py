@@ -45,7 +45,7 @@ from spacy.symbols import ORTH
 from tqdm import tqdm
 import pandas as pd
 from collections import defaultdict
-
+import sys
 
 id2name = {1: "PopSci_MultiplEYE", 2: "Ins_HumanRights", 3: "Ins_LearningMobility", 4: "Lit_Alchemist", 6: "Lit_MagicMountain", 7: "Lit_NorthWind", 8: "Lit_Solaris", 9: "Lit_BrokenApril", 10: "Arg_PISACowsMilk", 11: "Arg_PISARapaNui", 12: "PopSci_Caveman", 13: "Enc_WikiMoon"}
 name2id = {v:k for k,v in id2name.items()}
@@ -298,6 +298,14 @@ all_data = load_all_json(LANG_FOLDER)
 #for k,v in all_data.items():
 #    if v[0]:
 #        print(k, v[0][:10])
+
+# regenerate only one language if given as argument
+lang_code_param = sys.argv[1] if len(sys.argv) > 1 else None
+if lang_code_param in all_data:
+    all_data = {lang_code_param: all_data[lang_code_param]}
+    print(f"Processing only {lang_code_param}")
+elif lang_code_param is not None:
+    raise ValueError(f"Language code {lang_code_param} not found in {all_data.keys()}")
 
 
 preproc = defaultdict(dict)
