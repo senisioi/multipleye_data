@@ -25,7 +25,7 @@ def exists_spacy_blank(lang_code):
 def make_language_label(lang_code):
     if lang_code in SPACY_LANGUAGES:
         return CODE2LANG.get(lang_code, lang_code)
-    elif lang_code in {'he', 'zh', 'yue'}:
+    elif lang_code in {'he', 'tr', 'zh', 'yue'}:
         return CODE2LANG.get(lang_code, lang_code)
     elif exists_spacy_blank(lang_code):
         return CODE2LANG.get(lang_code, lang_code) + "*"

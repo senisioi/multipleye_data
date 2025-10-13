@@ -78,18 +78,18 @@ LANG_COLORS = {
     # --- Romance (amber/orange hues) ---
     "ca": "#fde047",  # Catalan
     "es": "#facc15",  # Spanish
-    "fr": "#fbbf24",  # French
+    "pt": "#fbbf24",  # Portuguese
     "it": "#f59e0b",  # Italian
-    "pt": "#d97706",  # Portuguese
-    "ro": "#b45309",  # Romanian
-    "rm": "#78350f",  # Romansh
+    "fr": "#d97706",  # French
+    "rm": "#b45309",  # Romansh
+    "ro": "#78350f",  # Romanian
 
     # --- Slavic (emerald/green hues) ---
     "sl": "#A2EAD5",  # Slovenian
     "hr": "#6ee7b7",  # Croatian
     "mk": "#34d399",  # Macedonian
-    "cs": "#10b981",  # Polish
-    "pl": "#059669",  # Czech
+    "pl": "#10b981",  # Czech
+    "cs": "#059669",  # Polish
     "uk": "#065f46",  # Ukrainian
     "ru": "#064e3b",  # Russian
 
