@@ -126,10 +126,10 @@ def make_single_figure(
     fig_lang.write_html(html_out)
     # remove legend on pdf
     fig_lang.update_layout(showlegend=False)  # , width=800)
-    pdf_out_dir = os.path.join(out_dir, "pdf", "single", xtitle)
-    os.makedirs(pdf_out_dir, exist_ok=True)
+    #pdf_out_dir = os.path.join(out_dir, "pdf", "single", xtitle)
+    #os.makedirs(pdf_out_dir, exist_ok=True)
     fig_lang.write_image(
-        os.path.join(pdf_out_dir, f"{feature}_per_{level}_{xtitle}.pdf")
+        os.path.join(html_out_dir, f"{feature}_per_{level}_{xtitle}.pdf")
     )
     return html_out
 

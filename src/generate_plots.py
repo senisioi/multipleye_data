@@ -39,10 +39,11 @@ for lang_dir in os.listdir(IN_DIR):
             language_data[lang_dir] = pd.concat(language_csvs, axis=0)
 
 
+LEVEL = 'page'  # page, stimulus, language
 out = {}
 limit = 100
 for lang_code, _ in tqdm(language_data.items()):
-    out[lang_code] = featurize(language_data[lang_code])
+    out[lang_code] = featurize(language_data[lang_code], LEVEL)
     if limit <= 0:
         break
     limit -= 1
@@ -69,7 +70,7 @@ with open('html/feature_tables.html', 'w') as f:
     f.write(feature_tables_html)
 
 feature = 'function words ratio'
-level='page'
+
 #make_combined_figure(out, feature = feature, out_dir='./html/img', show=False)
 
 
@@ -79,15 +80,15 @@ text_wise_links = {}
 #import sys
 
 for feature in tqdm(out['ro'].columns):
-    p_comb = make_combined_figure(out, feature=feature, out_dir='./html/img', show=False)
+    p_comb = make_combined_figure(out, feature=feature, level=LEVEL, out_dir='./html/img', show=False)
     links[feature] = os.path.relpath(p_comb, start='html')
 
-    p_txt = make_line_plots(out, feature, level=level, out_dir='./html/img', xtitle='', show=False, show_error_y=False)
+    p_txt = make_line_plots(out, feature, level=LEVEL, out_dir='./html/img', xtitle='', show=False, show_error_y=False)
     text_wise_links[feature] = os.path.relpath(p_txt, start='html')
-    lang_df, doc_dfs, _ = make_intermediate_features_for_plot(out, feature, level)
-    make_single_figure(lang_df, feature, level=level, out_dir='./html/img', show=False, xtitle='All documents')
+    lang_df, doc_dfs, _ = make_intermediate_features_for_plot(out, feature, LEVEL)
+    make_single_figure(lang_df, feature, level=LEVEL, out_dir='./html/img', show=False, xtitle='All documents')
     for k, docdf in doc_dfs.items():
-        make_single_figure(docdf, feature, level=level, out_dir='./html/img', show=False, xtitle=k, show_error_y=False)
+        make_single_figure(docdf, feature, level=LEVEL, out_dir='./html/img', show=False, xtitle=k, show_error_y=False)
 
 #sys.exit(1)
 

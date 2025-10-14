@@ -28,9 +28,31 @@ def iter_pages_df(df):
         yield sname, page_num, page_df
 
 
-def basic_page_features(df):
+def iter_stimuli_df(df):
+    for stim_name, stim_df in df.groupby("stimulus_name"):
+        yield stim_name, -1, stim_df
+
+
+def iter_lang(df):
+    lang_code = df.language_code.unique()[0]
+    yield lang_code, -2, df
+
+
+
+def iter_df(df, level='page'):
+    if level == 'page':
+        yield from iter_pages_df(df)
+    elif level == 'stimulus':
+        yield from iter_stimuli_df(df)
+    elif level == 'language':
+        yield from iter_lang(df)
+    else:
+        raise ValueError(f"Unknown level {level}")
+
+
+def basic_page_features(df, level):
     rows = []
-    for stim_name, page_num, page_df in iter_pages_df(df):
+    for stim_name, page_num, page_df in iter_df(df, level=level):
         tokens = [tok.lower() for tok in page_df[page_df.is_alpha].token]
         types = set(tokens)
         ttr = len(types) / len(tokens) if tokens else 0
@@ -58,9 +80,9 @@ def basic_page_features(df):
     return df
 
 
-def POS_count(df, POS="PRON"):
+def POS_count(df, POS, level):
     rows = []
-    for stim_name, page_num, page_df in iter_pages_df(df):
+    for stim_name, page_num, page_df in iter_df(df, level=level):
         num_pos = sum(page_df.upos == POS)
         tokens = [tok.lower() for tok in page_df[page_df.is_alpha].token]
         rows.append(
@@ -76,10 +98,10 @@ def POS_count(df, POS="PRON"):
     return df
 
 
-def zipf_freq(df):
+def zipf_freq(df, level):
     rows = []
     lang_code = df.language_code.unique()[0]
-    for stim_name, page_num, page_df in iter_pages_df(df):
+    for stim_name, page_num, page_df in iter_df(df, level=level):
         # no lowercasing
         tokens = [tok for tok in page_df[page_df.is_alpha].token]
         frequencies = [0]
@@ -104,9 +126,9 @@ def zipf_freq(df):
     return df
 
 
-def fertility(df, tokenizer):
+def fertility(df, tokenizer, level):
     rows = []
-    for stim_name, page_num, page_df in iter_pages_df(df):
+    for stim_name, page_num, page_df in iter_df(df, level=level):
         # no lowercase
         tokens = [tok for tok in page_df[page_df.is_alpha].token]
         llm_tokens = 0
@@ -125,18 +147,18 @@ def fertility(df, tokenizer):
     return df
 
 
-def featurize(df):
+def featurize(df, level):
     #tok_name = "swiss-ai/Apertus-70B-2509"
     tok_name = "xlm-roberta-base"
     tokenizer = AutoTokenizer.from_pretrained(tok_name)
     return pd.concat(
         [
-            basic_page_features(df),
-            zipf_freq(df),
-            fertility(df, tokenizer),
-            POS_count(df, "PRON"),
-            POS_count(df, "NOUN"),
-            POS_count(df, "VERB"),
+            basic_page_features(df, level=level),
+            zipf_freq(df, level=level),
+            fertility(df, tokenizer, level=level),
+            POS_count(df, "PRON", level=level),
+            POS_count(df, "NOUN", level=level),
+            POS_count(df, "VERB", level=level),
         ],
         axis=1,
     )
