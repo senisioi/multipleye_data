@@ -73,7 +73,6 @@ feature = 'function words ratio'
 
 #make_combined_figure(out, feature = feature, out_dir='./html/img', show=False)
 
-
 # make an index html that links to each html figure
 links = {}
 text_wise_links = {}
