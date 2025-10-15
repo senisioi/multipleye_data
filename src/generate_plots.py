@@ -1,4 +1,5 @@
 import os
+import sys
 import pandas as pd
 from tqdm import tqdm
 from collections import defaultdict
@@ -39,6 +40,15 @@ for lang_dir in os.listdir(IN_DIR):
             language_data[lang_dir] = pd.concat(language_csvs, axis=0)
 
 
+
+LANG_PARAM = sys.argv[1] if len(sys.argv) > 1 else None
+if LANG_PARAM:
+    if LANG_PARAM in language_data:
+        language_data = {LANG_PARAM: language_data[LANG_PARAM]}
+        print(f"Processing only {LANG_PARAM}")
+    else:
+        raise ValueError(f"Language code {LANG_PARAM} not found in {language_data.keys()}")
+
 LEVEL = 'page'  # page, stimulus, language
 out = {}
 limit = 100
@@ -78,7 +88,7 @@ links = {}
 text_wise_links = {}
 #import sys
 
-for feature in tqdm(out['ro'].columns):
+for feature in tqdm(out[list(out.keys())[0]].columns):
     p_comb = make_combined_figure(out, feature=feature, level=LEVEL, out_dir='./html/img', show=False)
     links[feature] = os.path.relpath(p_comb, start='html')
 

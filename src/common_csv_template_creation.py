@@ -46,9 +46,28 @@ from tqdm import tqdm
 import pandas as pd
 from collections import defaultdict
 import sys
+import unicodedata
 
 id2name = {1: "PopSci_MultiplEYE", 2: "Ins_HumanRights", 3: "Ins_LearningMobility", 4: "Lit_Alchemist", 6: "Lit_MagicMountain", 7: "Lit_NorthWind", 8: "Lit_Solaris", 9: "Lit_BrokenApril", 10: "Arg_PISACowsMilk", 11: "Arg_PISARapaNui", 12: "PopSci_Caveman", 13: "Enc_WikiMoon"}
 name2id = {v:k for k,v in id2name.items()}
+
+
+def isalpha_inclusive(s):
+    if not s:
+        return False
+    saw_base = False
+    for ch in unicodedata.normalize("NFC", s):
+        cat = unicodedata.category(ch)
+        if cat.startswith("L") or cat == "Nd":
+            saw_base = True
+            continue
+        if cat in ("Mn", "Mc", "Me"):
+            # combining marks are fine, but should follow a base char
+            if not saw_base:
+                return False
+            continue
+        return False
+    return True
 
 
 def xls_to_json(in_file, out_file):
@@ -238,7 +257,7 @@ def stimuli2csv(stimuli, lang_code, level="page", small=False):
                           "stimulus_name": sname,
                           "page": page,
                           "token": token.text,
-                          "is_alpha": token.is_alpha,
+                          "is_alpha": isalpha_inclusive(token.text.strip()), #token.is_alpha,
                           "is_stop": False,
                           "is_punct": token.is_punct,
                           "lemma": "",
@@ -259,7 +278,7 @@ def stimuli2csv(stimuli, lang_code, level="page", small=False):
                             "stimulus_name": sname,
                             "page": page,
                             "token": token.text,
-                            "is_alpha": token.is_alpha,
+                            "is_alpha": isalpha_inclusive(token.text.strip()), #token.is_alpha,
                             "is_stop": token.is_stop,
                             "is_punct": token.is_punct,
                             "lemma": token.lemma_,
