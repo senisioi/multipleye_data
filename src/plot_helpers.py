@@ -111,7 +111,7 @@ def make_single_figure(
     fig_lang.update_layout(
         barmode="group",
         yaxis_title=f"mean {feature} per {level}",
-        title=f"{xtitle}: mean {feature} per {level} by language",
+        # title=f"{xtitle}: mean {feature} per {level} by language",
         # width=1200,
         # title_y=0.89,
     )

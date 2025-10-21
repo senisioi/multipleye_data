@@ -4,6 +4,7 @@ import numpy as np
 from wordfreq import available_languages
 from wordfreq import zipf_frequency
 from transformers import AutoTokenizer
+import unicodedata
 
 
 id2name = {
@@ -50,14 +51,30 @@ def iter_df(df, level='page'):
         raise ValueError(f"Unknown level {level}")
 
 
+def is_punct(text: str) -> bool:
+    for char in text:
+        if not unicodedata.category(char).startswith("P"):
+            return False
+    return True
+
+
+def count_punct(text: str) -> int:
+    count = 0
+    for char in text:
+        if unicodedata.category(char).startswith("P"):
+            count += 1
+    return count
+
+
 def basic_page_features(df, level):
     rows = []
     for stim_name, page_num, page_df in iter_df(df, level=level):
         tokens = [tok.lower() for tok in page_df[page_df.is_alpha].token]
         types = set(tokens)
         ttr = len(types) / len(tokens) if tokens else 0
-        num_punct = len(page_df[page_df.is_punct])
-        num_stop = len(page_df[page_df.is_stop])
+        num_punct = count_punct(" ".join(page_df.token))
+        # some stopword lists include punctuation; exclude those
+        num_stop = len([wd for wd in page_df[page_df.is_stop].token if not is_punct(wd)])
         num_sentences = sum(page_df.token == '<eos>')
         word_len = [len(tok) for tok in tokens]
         rows.append(

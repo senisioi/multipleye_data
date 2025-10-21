@@ -51,6 +51,7 @@ import unicodedata
 id2name = {1: "PopSci_MultiplEYE", 2: "Ins_HumanRights", 3: "Ins_LearningMobility", 4: "Lit_Alchemist", 6: "Lit_MagicMountain", 7: "Lit_NorthWind", 8: "Lit_Solaris", 9: "Lit_BrokenApril", 10: "Arg_PISACowsMilk", 11: "Arg_PISARapaNui", 12: "PopSci_Caveman", 13: "Enc_WikiMoon"}
 name2id = {v:k for k,v in id2name.items()}
 
+HAUSA_STOP = set(["a","amma","ba","ban","ce","cikin","da","don","ga","in","ina","ita","ji","ka","ko","kuma","lokacin","ma","mai","na","ne","ni","sai","shi","su","suka","sun","ta","tafi","take","tana","wani","wannan","wata","ya","yake","yana","yi","za"])
 
 def isalpha_inclusive(s):
     if not s:
@@ -250,8 +251,7 @@ def stimuli2csv(stimuli, lang_code, level="page", small=False):
                 # for Romansh we use the Italian model and
                 # don't set all the values
                 if lang_code == 'rm':
-                    rows.append(
-                          {
+                    current_row = {
                           "language": CODE2LANG[lang_code],
                           "language_code": lang_code,
                           "stimulus_name": sname,
@@ -269,10 +269,8 @@ def stimuli2csv(stimuli, lang_code, level="page", small=False):
                           "deps": "_",
                           "misc": get_misc(token, include_ner=False)
                       }
-                    )
                 else:
-                    rows.append(
-                        {
+                    current_row = {
                             "language": CODE2LANG[lang_code],
                             "language_code": lang_code,
                             "stimulus_name": sname,
@@ -290,7 +288,9 @@ def stimuli2csv(stimuli, lang_code, level="page", small=False):
                             "deps": "_",
                             "misc": get_misc(token, include_ner=True)
                         }
-                    )
+                if lang_code == 'ha' and current_row['token'].lower() in HAUSA_STOP:
+                    current_row['is_stop'] = True
+                rows.append(current_row)    
             rows.append(eos)
     df = pd.DataFrame(rows).sort_values(by=["stimulus_name", "page"])
     df = pd.DataFrame(rows)

@@ -55,6 +55,7 @@ CODE2LANG = {
     "sv": "Swedish",
     "tr": "Turkish",
     "uk": "Ukrainian",
+    "ur": "Urdu",
     "yue": "Cantonese",
     "zh": "Chinese",
 }
@@ -115,7 +116,8 @@ LANG_COLORS = {
     "ha": "#be123c",  # Hausa 
 
     # --- Indo-Aryan ---
-    "hi": "#eab308",  # Hindi
+    "hi": "#ea79ec",  # Hindi
+    "ur": "#c026d3",  # Urdu
 
     # --- Sino-Tibetan (cyan hues) ---
     "zh": "#22d3ee",  # Mandarin Chinese
